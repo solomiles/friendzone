@@ -1,0 +1,1 @@
+ErrorDocument 403 http://localhost/friendzone/404.php
