@@ -43,6 +43,7 @@
   <?php include 'navigation/navigation.php' ?>
 
   <?php include 'sidebar/sidebar.php'; ?>
+  <?php include 'user_wall.php'; ?>
     
   <?php include 'footer/footer.php'; ?>
   </div>

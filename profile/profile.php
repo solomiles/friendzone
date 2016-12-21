@@ -4,29 +4,30 @@
   include("../dbconnect.php");
     $title = ' PROFILE | Friendzone';
    // if session is not set this will redirect to login page
-  if($_SESSION['user']=="" ) {
-    header("Location: login.php");
-  }
-
+  // if($_SESSION['user']=="" ) {
+  //   header("Location: login.php");
+  
+    $error = false;
 
  // if session is not set this will redirect to login page
  
 function db_query($query){ 
    $connection = db_connect();
    $result = mysqli_query($connection,$query);
+    
     // $image = mysqli_query($connection,$query);
     $id = $_SESSION['user'];
 
-$result = db_query("SELECT * FROM users WHERE userUsername = '$id'");
+// $result = db_query("SELECT * FROM users WHERE userUsername = '$id'");
 
 // $object = mysqli_fetch_array($result);
 
 
-// $username=$object['username'];
-// $fname=$object['fullname'];
-// $email=$object['email'];
-// $descrip=$object['description'];
-// $phone=$object['phone'];
+// $username=object['username'];
+// $fname  =$object(['fullname']);
+// $email  = $object['email'];
+// $descrip  =$object['description'];
+// $phone  =$object['phone'];
 
 
 //  if(isset($_POST['upload'])) {
@@ -35,7 +36,8 @@ $result = db_query("SELECT * FROM users WHERE userUsername = '$id'");
 //   $description   = $_POST['description'];
 //   $phone = $_POST['phone'];
 // }
-if(isset($_POST['btn-update'])) {
+if( isset($_POST['btn-update']) ) {
+  $id = $_SESSION['user'];
 
 
  $fullname = trim($_POST['fullname']);
@@ -53,16 +55,31 @@ if(isset($_POST['btn-update'])) {
   $phone = trim($_POST['phone']);
   $phone = strip_tags($phone);
   $phone = htmlspecialchars($phone);
+  return $result;
 
+          // $username = $object['username'];
+          // $fname  = $object['fullname'];
+          // $email  = $object['email'];
+          // $descrip  = $object['description'];
+          // $phone  = $object['phone'];
+        
 
-        $result = db_query("UPDATE users SET userFullname = '$fullname', userEmail = '$email', Description = '$description', Phone = '$phone',  WHERE userUsername = '$id'");
-        if ($result === true) {
-    $errMSG = "success! ";
-    echo "saved";
-   }
+        $result = db_query("UPDATE users SET userFullname = '$fullname', userEmail = '$email', Description = '$description', Phone = '$phone'  WHERE userUsername = '$id'");
+        // while($row = mysql_fetch_array($result)){
+          
+        // }
+        if ($result == 1) {
+          // $row=mysqli_fetch_array($result);
+          // $fname = $row['userFullname'];
+          
+
+          $errMSG = "success!hsjbifodhojeofajlkrbesgusifbioej;woafsghulfduiihssfdg;oluidfi; ";
+          echo $errMSG;
+
+        }
     else {
     $errMSG = "Something went wrong, try again later..."; 
-   } 
+   }  exit(0);
   // if ($result == 1) {
   //   $row=mysqli_fetch_array($result);
   //     $success = '<p style="color:blue;text-align:center;"> Records saved!</p>';
@@ -79,7 +96,6 @@ if(isset($_POST['btn-update'])) {
 }
 
 }
-
 // $pics ="";
 
 if(isset($_POST['Submit'])){
@@ -107,9 +123,13 @@ if(isset($_POST['Submit'])){
 
             $result =  db_query("UPDATE users SET Profilepic = '$name' WHERE userUsername = '$id'");
             }
-
-        } 
-   
+            
+        } if ($result == 1) {
+          # code... 
+          $row=mysqli_fetch_array($result);
+          $_SESSION['image'] = $row['Profilepic'];
+        }
+          
       }
       
 //    $result = db_query("SELECT Profilepic FROM users WHERE Profilepic = '$temp'");
@@ -163,7 +183,7 @@ if(isset($_POST['Submit'])){
       <form  method="post" enctype='multipart/form-data'>
         <div class="text-center"><div class="profile-userpic">
 
-          <img src="" class="avatar img-circle img-responsive" alt="profile picture"></div>
+          <img src="<?php echo $_SESSION['image']; ?>" class="avatar img-circle img-responsive" alt="profile picture"></div>
           <h6>Upload a different photo...</h6>
           
           <input type="file" class="form-control" name="image"><br>
@@ -185,7 +205,7 @@ if(isset($_POST['Submit'])){
           <div class="form-group">
             <label class="col-lg-3 control-label">Full Name:</label>
             <div class="col-lg-8">
-              <input class="form-control" type="text" name="fullname" value="<?php echo $fname; ?>" >
+              <input class="form-control" type="text" name="fullname" value="<?php echo (isset($fname)) ? $fname : ''; ?>" >
             </div>
           </div>
           <div class="form-group">
@@ -197,7 +217,7 @@ if(isset($_POST['Submit'])){
           <div class="form-group">
             <label class="col-lg-3 control-label">Description:</label>
             <div class="col-lg-8">
-              <input class="form-control" type="text" name="description" >
+            <textarea class="form-control" type="text" name="description" ><?php echo (isset($descrip)) ? $descrip : ''; ?></textarea>
             </div>
           </div>
           <div class="form-group">
@@ -232,3 +252,4 @@ if(isset($_POST['Submit'])){
 
   </body>
 </html>
+<?php ob_end_flush(); ?>
