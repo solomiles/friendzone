@@ -1,2 +1,0 @@
-deny from all
-ErrorDocument 500 http://localhost/friendzone/css/404.php

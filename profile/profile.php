@@ -14,20 +14,19 @@
 function db_query($query){ 
    $connection = db_connect();
    $result = mysqli_query($connection,$query);
-    
+return $result;
+  }  
     // $image = mysqli_query($connection,$query);
     $id = $_SESSION['user'];
 
-// $result = db_query("SELECT * FROM users WHERE userUsername = '$id'");
+    $result = db_query("SELECT * FROM users WHERE userUsername = '$id'");
 
-// $object = mysqli_fetch_array($result);
+    $row = mysqli_fetch_array($result);
 
-
-// $username=object['username'];
-// $fname  =$object(['fullname']);
-// $email  = $object['email'];
-// $descrip  =$object['description'];
-// $phone  =$object['phone'];
+  $fname = $row['userFullname'];
+  $email = $row['userEmail'];
+  $descrip = $row['Description'];
+  $phone = $row['Phone'];
 
 
 //  if(isset($_POST['upload'])) {
@@ -37,7 +36,7 @@ function db_query($query){
 //   $phone = $_POST['phone'];
 // }
 if( isset($_POST['btn-update']) ) {
-  $id = $_SESSION['user'];
+  
 
 
  $fullname = trim($_POST['fullname']);
@@ -55,7 +54,7 @@ if( isset($_POST['btn-update']) ) {
   $phone = trim($_POST['phone']);
   $phone = strip_tags($phone);
   $phone = htmlspecialchars($phone);
-  return $result;
+  
 
           // $username = $object['username'];
           // $fname  = $object['fullname'];
@@ -64,39 +63,23 @@ if( isset($_POST['btn-update']) ) {
           // $phone  = $object['phone'];
         
 
-        $result = db_query("UPDATE users SET userFullname = '$fullname', userEmail = '$email', Description = '$description', Phone = '$phone'  WHERE userUsername = '$id'");
-        // while($row = mysql_fetch_array($result)){
-          
-        // }
-        if ($result == 1) {
-          // $row=mysqli_fetch_array($result);
-          // $fname = $row['userFullname'];
-          
-
-          $errMSG = "success!hsjbifodhojeofajlkrbesgusifbioej;woafsghulfduiihssfdg;oluidfi; ";
-          echo $errMSG;
-
-        }
-    else {
-    $errMSG = "Something went wrong, try again later..."; 
-   }  exit(0);
-  // if ($result == 1) {
-  //   $row=mysqli_fetch_array($result);
-  //     $success = '<p style="color:blue;text-align:center;"> Records saved!</p>';
-  //    }
-  //     else {
-  //     $success = "Something went wrong, try again later..."; 
-  //    } 
-
-
-        // if ($result){
-        //         $success = '<p style="color:blue;text-align:center;"> Records saved!</p>';
-        // }
-    // header("location:profiletest.php");
+  $result = db_query("UPDATE users SET userFullname = '$fullname', userEmail = '$email', Description = '$description', Phone = '$phone'  WHERE userUsername = '$id'");
+  if ($result == 1) {
+    $errMSG = " Records saved!";
+  }
+  else {
+  $errMSG = "Something went wrong, try again later..."; 
+ } 
 }
 
-}
-// $pics ="";
+
+$id = $_SESSION['user'];
+
+$result = db_query("SELECT * FROM users WHERE userUsername = '$id'");
+
+$row = mysqli_fetch_array($result);
+
+$display = $row['Profilepic'];
 
 if(isset($_POST['Submit'])){
         $id = $_SESSION['user'];
@@ -105,7 +88,7 @@ if(isset($_POST['Submit'])){
         $size = $_FILES["image"] ["size"];
         $temp = $_FILES["image"] ["tmp_name"];
         $error = $_FILES["image"] ["error"];
-
+        $path = '../images/users/'. $name;
 
 
        
@@ -119,22 +102,25 @@ if(isset($_POST['Submit'])){
             }
             else
             {
-            move_uploaded_file($temp,"../images/users/".$name);
+            move_uploaded_file($temp, $path);
 
             $result =  db_query("UPDATE users SET Profilepic = '$name' WHERE userUsername = '$id'");
             }
             
-        } if ($result == 1) {
-          # code... 
-          $row=mysqli_fetch_array($result);
-          $_SESSION['image'] = $row['Profilepic'];
-        }
+        } 
+        // if ($result == 1) {
+        //   # code... 
+        //   $row = mysqli_fetch_array($result);
+        //   $display = $row['Profilepic'];
+
+        // }
+
           
       }
       
 //    $result = db_query("SELECT Profilepic FROM users WHERE Profilepic = '$temp'");
 // // echo $result;
-//     if( $result == 1 ) {
+//     if( $result == 1 ) {9
 //     $row=mysqli_fetch_array($result);
 //     $pics = $row['Profilepic'];
 //   } else {
@@ -152,7 +138,7 @@ if(isset($_POST['Submit'])){
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title><?php echo $title; ?></title>
-    <link rel="shortcut icon" href="../images/friendzone.png" type="image/x-icon" />
+    <link rel="shortcut icon" href="" type="image/x-icon">
     <!-- Bootstrap -->
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <!-- <link href="css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"> -->
@@ -161,14 +147,12 @@ if(isset($_POST['Submit'])){
     <!-- main css for friendzone -->
     <link rel="stylesheet" type="text/css" href="../css/friendzone.css">
 
-    <!-- <link rel="stylesheet" type="text/css" href="../../footer/css/footer.css"> -->
-
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
+    <!-- [if lt IE 9]> -->
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <!-- <![endif] -->
    
   </head>
   <body>
@@ -183,7 +167,7 @@ if(isset($_POST['Submit'])){
       <form  method="post" enctype='multipart/form-data'>
         <div class="text-center"><div class="profile-userpic">
 
-          <img src="<?php echo $_SESSION['image']; ?>" class="avatar img-circle img-responsive" alt="profile picture"></div>
+          <img src="../images/users/<?php echo $display; ?>" class="avatar img-circle img-responsive" alt="profile picture"></div>
           <h6>Upload a different photo...</h6>
           
           <input type="file" class="form-control" name="image"><br>
@@ -197,33 +181,33 @@ if(isset($_POST['Submit'])){
         <div class="alert alert-info alert-dismissable">
           <a class="panel-close close" data-dismiss="alert">×</a> 
           <i class="fa fa-coffee"></i>
-          Please edit your information below
+          Please edit your information below ----> <?php echo $errMSG; ?>
         </div>
         <h3>Personal info</h3>
         
-        <form class="form-horizontal" role="form" name="upload" method="post">
+        <form class="form-horizontal" role="form" action="<?php echo $_SERVER['PHP_SELF']; ?>" name="upload" method="post">
           <div class="form-group">
             <label class="col-lg-3 control-label">Full Name:</label>
             <div class="col-lg-8">
-              <input class="form-control" type="text" name="fullname" value="<?php echo (isset($fname)) ? $fname : ''; ?>" >
+              <input class="form-control" type="text" name="fullname" value="<?php echo $fname; ?>" >
             </div>
           </div>
           <div class="form-group">
             <label class="col-lg-3 control-label">Email:</label>
             <div class="col-lg-8">
-              <input class="form-control" type="text" name="email" >
+              <input class="form-control" type="text" name="email" value="<?php echo $email; ?>" >
             </div>
           </div>
           <div class="form-group">
             <label class="col-lg-3 control-label">Description:</label>
             <div class="col-lg-8">
-            <textarea class="form-control" type="text" name="description" ><?php echo (isset($descrip)) ? $descrip : ''; ?></textarea>
+            <input class="form-control" type="text" name="description" value="<?php echo $descrip; ?>" >
             </div>
           </div>
           <div class="form-group">
             <label class="col-lg-3 control-label">Phone no:</label>
             <div class="col-lg-8">
-              <input class="form-control" type="text" name="phone" >
+              <input class="form-control" type="text" name="phone" value="<?php echo $phone; ?>" >
             </div>
           </div>
           <div class="form-group">

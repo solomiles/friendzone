@@ -7,6 +7,19 @@
  if($_SESSION['user']=="" ) {
   header("Location: login.php");
  }
+  function db_query($query){ 
+   $connection = db_connect();
+   $result = mysqli_query($connection,$query);
+    return $result;
+  }  
+
+    $id = $_SESSION['user'];
+
+    $result = db_query("SELECT * FROM users WHERE userUsername = '$id'");
+
+    $row = mysqli_fetch_array($result);
+
+    $display = $row['Profilepic'];
  // select loggedin users detail
  // $res=mysql_query("SELECT * FROM users WHERE userUsername=".$_SESSION['user']);
  // $userRow=mysql_fetch_array($res);

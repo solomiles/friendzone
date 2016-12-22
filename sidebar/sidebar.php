@@ -121,7 +121,7 @@ body {
 		<div class="profile-sidebar">
 			<!-- SIDEBAR USERPIC -->
 			<div class="profile-userpic">
-				<img src="images/solomiles.jpg" class="img-responsive" alt="">
+				<img src="images/users/<?php echo $display; ?>" class="img-responsive" alt="">
 			</div>
 			<!-- END SIDEBAR USERPIC -->
 			<!-- SIDEBAR USER TITLE -->

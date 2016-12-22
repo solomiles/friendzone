@@ -84,8 +84,7 @@ Lastname:
 value="<?php echo $last; ?>">
 </p> <br>
 <p>
-Change Password: <input type="text" name="password" id="inputtype"
-value="<?php echo $pass; ?>">
+Change Password: <input type="text" name="password" id="inputtype" value="<?php echo $pass; ?>">
 </p> <br>
 <p>
 
