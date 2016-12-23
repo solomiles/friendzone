@@ -19,15 +19,15 @@ return $result;
     // $image = mysqli_query($connection,$query);
     $id = $_SESSION['user'];
 
-    $result = db_query("SELECT * FROM users WHERE userUsername = '$id'");
-
-    $row = mysqli_fetch_array($result);
-
+  $result = db_query("SELECT * FROM users WHERE userUsername = '$id'");
+  
+  $row = mysqli_fetch_array($result);
+  
   $fname = $row['userFullname'];
   $email = $row['userEmail'];
-  $descrip = $row['Description'];
+  $description = $row['Description'];
   $phone = $row['Phone'];
-
+  $errMSG='';
 
 //  if(isset($_POST['upload'])) {
 //   $regfullname = $_POST['fullname'];
@@ -68,8 +68,8 @@ if( isset($_POST['btn-update']) ) {
     $errMSG = " Records saved!";
   }
   else {
-  $errMSG = "Something went wrong, try again later..."; 
- } 
+    $errMSG = "Something went wrong, try again later..."; 
+  } 
 }
 
 
@@ -138,22 +138,28 @@ if(isset($_POST['Submit'])){
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title><?php echo $title; ?></title>
-    <link rel="shortcut icon" href="" type="image/x-icon">
+    <!--for icon by osaighe -->
+    <link rel="shortcut icon" href="../images/friendzone.png" type="image/x-icon" />
     <!-- Bootstrap -->
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <!-- <link href="css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"> -->
     <link href="../css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <!-- <link href="css/solomonproject.min.css" rel="stylesheet" type="text/css"> -->
     <!-- main css for friendzone -->
+    <!-- <link href="css/solomonproject.min.css" rel="stylesheet" type="text/css"> -->
+    
     <link rel="stylesheet" type="text/css" href="../css/friendzone.css">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!-- [if lt IE 9]> -->
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <!--     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script> -->
     <!-- <![endif] -->
-   
+   <style type="text/css">
+     html, body {
+      background: #F1F3FA;
+     }
+   </style>
   </head>
   <body>
   <div class="container">
@@ -165,9 +171,9 @@ if(isset($_POST['Submit'])){
       <!-- left column -->
       <div class="col-md-3">
       <form  method="post" enctype='multipart/form-data'>
-        <div class="text-center"><div class="profile-userpic">
+        <div class="text-center profile-sidebar"><div class="profile-userpic">
 
-          <img src="../images/users/<?php echo $display; ?>" class="avatar img-circle img-responsive" alt="profile picture"></div>
+          <img src="../images/users/<?php echo $display; ?>" class="avatar img-responsive" alt="profile picture"></div>
           <h6>Upload a different photo...</h6>
           
           <input type="file" class="form-control" name="image"><br>
@@ -201,7 +207,7 @@ if(isset($_POST['Submit'])){
           <div class="form-group">
             <label class="col-lg-3 control-label">Description:</label>
             <div class="col-lg-8">
-            <input class="form-control" type="text" name="description" value="<?php echo $descrip; ?>" >
+            <input class="form-control" type="text" name="description" value="<?php echo $description; ?>" >
             </div>
           </div>
           <div class="form-group">

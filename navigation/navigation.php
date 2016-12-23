@@ -19,7 +19,7 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li class="active"><a href="../friendzone/home.php">Home<span class="sr-only"></span></a></li>
-        <li><a href="../friendzone/profile/profile.php">Profile</a></li>
+        <li><a href="../friendzone/profile">Profile</a></li>
         <li><a href="#"><span class="glyphicon glyphicon-comment" style=""></span>Msgs</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span><?php echo $_SESSION['user']; ?> <span class="caret"></span></a>

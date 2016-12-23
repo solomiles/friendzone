@@ -4,13 +4,14 @@
  include_once 'dbconnect.php';
 
  $title = "Login | friendzone";
- 
+ $errMSG = "";
  // it will never let you open index(login) page if session is set
  if ( isset($_SESSION['user'])) {
   header("location: home.php");
  }
  
  $error = false;
+ 
  
  if( isset($_POST['login']) ) { 
   
@@ -106,7 +107,7 @@
               <img src="images/loginthumbnail.png" class="thumbnail-login" alt="login">
               <div class="breadcrumb">Login To Friendzone</div>
              <!-- Main Form -->
-             <div class="btn-danger"><a href="login.php"><?php  ?></a></div>
+             <div class="btn-danger"><a href="login.php"></a><?php echo $errMSG; ?></div>
               <div class="login-form-1">
                 <form id="login-form" class="text-left" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" name="loginform" >
                   <div class="login-form-main-message"></div>

@@ -48,11 +48,11 @@ li.dropdown {
 .profile-userpic img {
   float: none;
   margin: 0 auto;
-  width: 80%;
-  height: 80%;
-  -webkit-border-radius: 10% !important;
-  -moz-border-radius: 10% !important;
-  border-radius: 10% !important;
+ /* width: 100%;
+  height: 100%;*/
+  -webkit-border-radius: 15% !important;
+  -moz-border-radius: 15% !important;
+  border-radius: 15% !important;
 }
 
 .profile-usertitle {

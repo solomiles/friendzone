@@ -20,6 +20,7 @@
     $row = mysqli_fetch_array($result);
 
     $display = $row['Profilepic'];
+    $descrip = $row['Description'];
  // select loggedin users detail
  // $res=mysql_query("SELECT * FROM users WHERE userUsername=".$_SESSION['user']);
  // $userRow=mysql_fetch_array($res);

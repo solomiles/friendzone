@@ -10,6 +10,7 @@
 
  $error = false;
  $title = 'Friendzone | Signup';
+ $errMSG='';
 
  if ( isset($_POST['btn-signup']) ) {
   
@@ -167,7 +168,7 @@
             <div class="account-wall">
               <img src="images/sign-up-icon.jpg" class="thumbnail-login" alt="sign up">
               <div class="breadcrumb">Signup To Friendzone</div>
-              <div class="btn-success"><a href="login.php"><?php ?></a></div>
+              <div class="btn-success"><a href="login.php"><?php echo $errMSG; ?></a></div>
                 <!-- Main Form -->
                 <div class="login-form-1">
                   <form method="post" id="register-form" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" autocomplete="off" class="text-left">

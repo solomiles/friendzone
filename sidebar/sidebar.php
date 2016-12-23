@@ -130,7 +130,7 @@ body {
 					<?php echo ($_SESSION['user']); ?>
 				</div>
 				<div class="profile-usertitle-job">
-					Developer
+					<?php echo $descrip; ?>
 				</div>
 			</div>
 			<!-- END SIDEBAR USER TITLE -->
