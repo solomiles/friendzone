@@ -159,6 +159,9 @@ if(isset($_POST['Submit'])){
      html, body {
       background: #F1F3FA;
      }
+     h3 {
+      padding: 0 10px 0;
+     }
    </style>
   </head>
   <body>
@@ -181,9 +184,12 @@ if(isset($_POST['Submit'])){
           </form>
         </div>
       </div>
+      <div class="col-md-3">
+        <div class="profile-sidebar"></div>
+      </div>
       
       <!-- edit form column -->
-      <div class="col-md-9 personal-info">
+      <div class="col-md-6 personal-info profile-sidebar">
         <div class="alert alert-info alert-dismissable">
           <a class="panel-close close" data-dismiss="alert">×</a> 
           <i class="fa fa-coffee"></i>
