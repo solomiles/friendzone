@@ -53,9 +53,9 @@
    
   </head>
   <body>
-  <div class="container">
+  
   <?php include 'navigation/navigation.php' ?>
-
+<div class="container">
   <?php include 'sidebar/sidebar.php'; ?>
   <?php include 'user_wall.php'; ?>
     

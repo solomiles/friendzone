@@ -4,9 +4,9 @@
   include("../dbconnect.php");
     $title = ' PROFILE | Friendzone';
    // if session is not set this will redirect to login page
-  // if($_SESSION['user']=="" ) {
-  //   header("Location: login.php");
-  
+  if($_SESSION['user']=="" ) {
+    header("Location: ../login.php");
+  }
     $error = false;
 
  // if session is not set this will redirect to login page
